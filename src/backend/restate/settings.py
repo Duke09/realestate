@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -40,6 +41,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'accounts.apps.AccountsConfig',
+    'realtors.apps.RealtorsConfig',
 ]
 
 MIDDLEWARE = [
@@ -133,17 +135,17 @@ STATIC_URL = '/static/'
 
 STATIFILES_DIRS = [BASE_DIR / 'build' / 'static']
 
-STATIC_ROOT = [BASE_DIR / 'cdn' / 'static']
+STATIC_ROOT = os.path.join(BASE_DIR, 'cdn', 'static')
 
 MEDIA_URL = '/media/'
 
-MEDIA_ROOT = [BASE_DIR / 'cdn' / 'media']
+MEDIA_ROOT = os.path.join(BASE_DIR, 'cdn', 'media')
 
 # RestFramework
 
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSON_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated'
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication'
